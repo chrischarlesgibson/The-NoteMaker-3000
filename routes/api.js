@@ -4,7 +4,7 @@ const path = require("path");
 
 // get request for index html
 api.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname + "/public/index.html"))
+  res.sendFile(path.join(__dirname + "../public/index.html"))
 );
 
 //get for notes api

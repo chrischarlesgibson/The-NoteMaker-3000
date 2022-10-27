@@ -8,8 +8,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //importing module routers
-const htmlRouter = require("../routes/html");
-const apiRouter = require("../routes/api");
+const htmlRouter = require("./routes/html");
+const apiRouter = require("./routes/api");
 //requiring mini app to use the modular routers
 app.use("/api", apiRouter);
 app.use("/", htmlRouter);
