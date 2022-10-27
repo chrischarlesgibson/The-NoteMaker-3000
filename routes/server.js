@@ -15,8 +15,7 @@ app.use("../routes/api", apiRouter);
 app.use("../routes/html", htmlRouter);
 //making new instance of express
 
-app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
-});
+app.listen(process.env.port || 3000);
+console.log(`Example app listening at http://localhost:${PORT}`);
 
 module.exports = app;
