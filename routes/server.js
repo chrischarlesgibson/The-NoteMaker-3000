@@ -14,13 +14,14 @@ const apiRouter = require("../routes/api");
 
 //making new instance of express
 const app = express();
+const PORT = 3000;
 
 //requiring mini app to use the modular routers
 miniApp.use("../routes/api", apiRouter);
 miniApp.use("../routes/html", htmlRouter);
 
-module.exports = miniApp;
-
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
+
+module.exports = miniApp;
