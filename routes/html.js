@@ -9,7 +9,7 @@ html.get("/notes", (req, res) => {
 
 // get request for index html
 html.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
+  res.sendFile(path.join(__dirname + "public/index.html"));
   console.info(`${req.method} request received to get reviews`);
 });
 

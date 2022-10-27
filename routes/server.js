@@ -11,8 +11,8 @@ app.use(express.static("public"));
 const htmlRouter = require("../routes/html");
 const apiRouter = require("../routes/api");
 //requiring mini app to use the modular routers
-app.use("../routes/api", apiRouter);
-app.use("../routes/html", htmlRouter);
+app.use("/api", apiRouter);
+app.use("/", htmlRouter);
 //making new instance of express
 
 app.listen(process.env.port || 3000);
