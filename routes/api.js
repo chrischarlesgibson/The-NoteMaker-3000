@@ -15,12 +15,14 @@ const {
 } = require("../helpers/fsUtils");
 
 //get notes by id
-api.get("/notes/:note_id", (req, res) => {
-  const noteId = req.params.note_id;
+api.get("/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+  console.log(req.params);
+  console.log(selectedId);
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
     .then((json) => {
-      const result = json.filter((note) => note.note_id === noteId);
+      const result = json.filter((note) => note.id === noteId);
       return result.length > 0;
       // ? res.json(result)
       // : res.json("No note with that ID");
@@ -45,7 +47,7 @@ api.post("/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote, "./db/db.json");
@@ -56,13 +58,15 @@ api.post("/notes", (req, res) => {
 });
 
 //to delete notes
-api.delete("/notes/:note_id", (req, res) => {
-  const selectedId = req.params.note_id;
+api.delete("/notes/:id", (req, res) => {
+  const selectedId = req.params.id;
+  console.log(req.params);
+  console.log(selectedId);
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
     .then((json) => {
       // Make a new array of all notes except the one with the ID provided in the URL
-      const result = json.filter((note) => note.note_id !== selectedId);
+      const result = json.filter((note) => note.id !== selectedId);
 
       // Save that array to the filesystem
       writeToFile("./db/db.json", result);
