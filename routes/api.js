@@ -15,7 +15,7 @@ const {
 } = require("../helpers/fsUtils");
 
 //get notes by id
-api.get("/:note_id", (req, res) => {
+api.get("/api/notes/:note_id", (req, res) => {
   const noteId = req.params.note_id;
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
@@ -29,7 +29,7 @@ api.get("/:note_id", (req, res) => {
 
 //post/save notes
 api.post("/api/notes", (req, res) => {
-  console.log(req.body);
+  console.info(`${req.method} request received for note`);
 
   const { title, text } = req.body;
 
