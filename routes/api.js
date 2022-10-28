@@ -1,24 +1,30 @@
 const express = require("express");
+
+//The express.Router() function is used to create a new router object.
 const api = express.Router();
-const path = require("path");
+//requiring node.js utility module bc  The Util module provides access to some utility functions.
+const util = require("util");
+// const path = require("path");
 const fs = require("fs");
 // const notesDatabase = require("../../db/db.json");
+
+// Middleware for parsing JSON and urlencoded  data
 api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
-const util = require("util");
 
+//uuidv4 is a dependency that generates and universally unique id, which i use to give each note a unique id. here i'm requiring it
 const { v4: uuidv4 } = require("uuid");
+
+//here im telling it to require the  readFromFile, readAndAppend and  writeToFile function from the feUtil file.
 const {
   readFromFile,
   readAndAppend,
   writeToFile,
 } = require("../helpers/fsUtils");
 
-//get notes by id
+//get notes by specific id. readfromfile returns a promisified data so we have to use .then and then use json parse to parse the data from a string to a js object, bc data is always received as string from web server. then we take the json data using .then and use filter to reate a new array of notes if that note id matches the requested id and returning the results if more than 0
 api.get("/notes/:id", (req, res) => {
   const noteId = req.params.id;
-  console.log(req.params);
-  console.log(selectedId);
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
     .then((json) => {
@@ -29,6 +35,7 @@ api.get("/notes/:id", (req, res) => {
     });
 });
 
+//get request for getting ALL notes
 api.get("/notes", (req, res) => {
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
@@ -37,12 +44,14 @@ api.get("/notes", (req, res) => {
     });
 });
 
-//post/save notes
+//post request for all notes that posts newly entered notees into the db.json file and allows them to be displayed on the saved notes section (data persistence)
 api.post("/notes", (req, res) => {
   console.info(`${req.method} request received for note`);
 
+  //properties that the body should have in order to be saved (text and title)
   const { title, text } = req.body;
 
+  //if the body of the request is there (text and title filled in), then the new note should have 3 properties, adding the id property
   if (req.body) {
     const newNote = {
       title,
@@ -50,6 +59,7 @@ api.post("/notes", (req, res) => {
       id: uuidv4(),
     };
 
+    //adding newnote to db.json
     readAndAppend(newNote, "./db/db.json");
     res.json(`note added successfully 🚀`);
   } else {
@@ -57,7 +67,7 @@ api.post("/notes", (req, res) => {
   }
 });
 
-//to delete notes
+//to delete a specific note
 api.delete("/notes/:id", (req, res) => {
   const selectedId = req.params.id;
   console.log(req.params);
@@ -75,8 +85,5 @@ api.delete("/notes/:id", (req, res) => {
       res.json(result);
     });
 });
-// * `GET /api/notes` should read the `db.json` file and return all saved notes as JSON.
-
-// * `POST /api/notes` should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
 
 module.exports = api;

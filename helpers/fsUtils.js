@@ -1,7 +1,9 @@
 const fs = require("fs");
 const util = require("util");
 
-// Promise version of fs.readFile
+//on this page are the utils that will do some work for me so that everything is modularized
+
+// Promisified version of fs.readFile
 const readFromFile = util.promisify(fs.readFile);
 /**
  *  Function to write data to the JSON file given a destination and some content
