@@ -22,8 +22,13 @@ const apiRouter = require("./routes/api");
 app.use("/api", apiRouter);
 app.use("/", htmlRouter);
 
-//telling app to listen at the speficied port and logging a message if it works
-app.listen(process.env.port || 3000);
-console.log(`Example app listening at http://localhost:${PORT}`);
+//telling app to listen at the speficied port and logging a message if it works. if there is an error than end program and tell us its an error else say its working
+app.listen(PORT, (err) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(`Example app listening at http://localhost:${PORT}`);
+});
 
 module.exports = app;
