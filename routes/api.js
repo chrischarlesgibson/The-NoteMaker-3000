@@ -21,9 +21,9 @@ api.get("/notes/:note_id", (req, res) => {
     .then((data) => JSON.parse(data))
     .then((json) => {
       const result = json.filter((note) => note.note_id === noteId);
-      return result.length > 0
-        ? res.json(result)
-        : res.json("No note with that ID");
+      return result.length > 0;
+      // ? res.json(result)
+      // : res.json("No note with that ID");
     });
 });
 
@@ -56,19 +56,19 @@ api.post("/notes", (req, res) => {
 });
 
 //to delete notes
-api.delete("/:note_id", (req, res) => {
-  const noteId = req.params.note_id;
+api.delete("/notes/:note_id", (req, res) => {
+  const selectedId = req.params.note_id;
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
     .then((json) => {
       // Make a new array of all notes except the one with the ID provided in the URL
-      const result = json.filter((note) => note.note_id !== noteId);
+      const result = json.filter((note) => note.note_id !== selectedId);
 
       // Save that array to the filesystem
       writeToFile("./db/db.json", result);
 
       // Respond to the DELETE request
-      res.json(`note ${noteId} has been deleted 🗑️`);
+      res.json(result);
     });
 });
 // * `GET /api/notes` should read the `db.json` file and return all saved notes as JSON.
