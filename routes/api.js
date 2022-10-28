@@ -1,6 +1,7 @@
 const express = require("express");
 const api = express.Router();
 const path = require("path");
+const fs = require("fs");
 // const notesDatabase = require("../../db/db.json");
 api.use(express.json());
 api.use(express.urlencoded({ extended: true }));

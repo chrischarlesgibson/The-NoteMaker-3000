@@ -1,6 +1,7 @@
 const express = require("express");
-const html = express.Router();
+// const html = express.Router();
 const path = require("path");
+const html = express();
 
 // get request for notes html
 html.get("/notes", (req, res) => {
