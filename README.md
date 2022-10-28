@@ -5,6 +5,7 @@
 ## Description
 
 NoteMaker3000 is an application that uses node.js and express.js to allow users to enter notes, save them and delete them. it's the perfect app for any student or anyone who wants to keep track of important info.
+[click here to go to NoteMaker3000](https://the-notemaker-3000.herokuapp.com/)
 
 ## Table of Contents
 
@@ -22,9 +23,8 @@ Node.js, express.js and uuid are required to run this application.
 
 ## Usage
 
-To start the application, open a terminal in the folder that contains server.js and run "node server.js".
-
-![Teamified photo](./Assets/teamified%20photo.png)
+When the page is opened the user will see the homepage, where they will be prompted to "get started". Upon cliking that button, the user will be brought to to the notes page for entering, saving and deleting notes. Click the floppy disk icon to save the notes, the "+" icon to add a new note and the trash can icon to delete the note.
+![Teamified photo](./Images/NoteMaker300.gif)
 
 ## License
 
